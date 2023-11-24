@@ -9,6 +9,15 @@ import java.time.LocalDate;
 public class Post {
     // PK
     @Id
+    @SequenceGenerator(
+            name= "post_sequence",
+            sequenceName = "post_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "post_sequence"
+    )
     private Long id;
 
     private String textualContent;

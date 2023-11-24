@@ -9,6 +9,15 @@ import java.time.LocalDate;
 public class Comment {
     // PK
     @Id
+    @SequenceGenerator(
+            name= "comment_sequence",
+            sequenceName = "comment_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "comment_sequence"
+    )
     private Long id;
 
     private String textualContent;
