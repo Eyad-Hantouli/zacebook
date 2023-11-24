@@ -1,2 +1,2 @@
-# Pending
-Waiting for pull requist
+# JPA DDL Code
+code for create structure of database
