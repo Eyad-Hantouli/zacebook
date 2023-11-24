@@ -10,13 +10,13 @@ public class RealtionShip {
     // PK FK
     @Id
     @ManyToOne
-    @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "user_name")
     private Person source;
 
     // PK FK
     @Id
     @ManyToOne
-    @JoinColumn(name = "receiver_id", referencedColumnName = "id")
+    @JoinColumn(name = "receiver_id", referencedColumnName = "user_name")
     private Person target;
 
     private Short type;

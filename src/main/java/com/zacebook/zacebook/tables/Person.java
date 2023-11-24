@@ -10,16 +10,8 @@ import java.util.Collection;
 public class Person {
     // PK
     @Id
-    @SequenceGenerator(
-            name= "person_sequence",
-            sequenceName = "person_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "person_sequence"
-    )
-    private Long id;
+    @Column(name="user_name")
+    private String userName;
 
     //Unique
     @Column(unique = true)
