@@ -1,5 +1,6 @@
 package com.zacebook.zacebook.tables;
 
+import com.zacebook.zacebook.enums.RelationShips;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,7 +20,7 @@ public class RealtionShip {
     @JoinColumn(name = "receiver_id", referencedColumnName = "user_name")
     private Person target;
 
-    private Short type;
+    private RelationShips type;
     private LocalDate date;
 
 }
