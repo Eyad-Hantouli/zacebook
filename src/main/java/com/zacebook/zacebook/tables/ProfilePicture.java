@@ -21,7 +21,40 @@ public class ProfilePicture {
     private String link;
 
     // FK
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", nullable = false)
     private Person author;
+
+    public ProfilePicture() {
+    }
+
+    public ProfilePicture(Long id, String link, Person author) {
+        this.id = id;
+        this.link = link;
+        this.author = author;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Person getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Person author) {
+        this.author = author;
+    }
 }
