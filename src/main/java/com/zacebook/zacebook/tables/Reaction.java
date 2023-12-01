@@ -1,5 +1,6 @@
 package com.zacebook.zacebook.tables;
 
+import com.zacebook.zacebook.enums.Reactions;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -19,13 +20,13 @@ public class Reaction {
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
-    private Short type;
+    private Reactions type;
     private LocalDate date;
 
     public Reaction() {
     }
 
-    public Reaction(Person author, Post post, Short type, LocalDate date) {
+    public Reaction(Person author, Post post, Reactions type, LocalDate date) {
         this.author = author;
         this.post = post;
         this.type = type;
@@ -48,11 +49,11 @@ public class Reaction {
         this.post = post;
     }
 
-    public Short getType() {
+    public Reactions getType() {
         return type;
     }
 
-    public void setType(Short type) {
+    public void setType(Reactions type) {
         this.type = type;
     }
 
