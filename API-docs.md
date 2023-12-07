@@ -1,118 +1,111 @@
 # Person Table.
 
-`GET`: localhost:8080/users/{user_name}
+`GET`: /users/{userName (String)}
 
-`GET`: localhost:8080/users/{firstName} {lastName}
+`POST`: /users -- Body (JSON): {
+        "userName": String -> PK,
+        "firstName": String,
+        "lastName": String,
+        "password": String,
+        "address": String,
+        "email": String -> UNIQUE,
+        "dob": "YYYY-MM-DD",
+        "activeProfilePicture": ProfilePictureId
+}
+`PUT`: /users -- Body (JSON): {
+       "userName": String -> PK,
+        "firstName": String,
+        "lastName": String,
+        "password": String,
+        "address": String,
+        "email": String -> UNIQUE,
+        "dob": "YYYY-MM-DD",
+        "activeProfilePicture": ProfilePictureId
+}
 
-`POST`: localhost:8080/users -- Body (JSON): {
-                                                "userName": String -> UNIQUE,
-                                                "firstName": String,
-                                                "lastName": String,
-                                                "password": String,
-                                                "address": String,
-                                                "email": String -> UNIQUE,
-                                                "dob": "YYYY-MM-DD",
-                                                "activeProfilePicture": ProfilePicture
-                                             }
-
-`PUT`: localhost:8080/users/{user_name} -- Body (JSON): {
-							    "userName": String -> UNIQUE,
-                                                            "firstName": String,
-                                                            "lastName": String,
-                                                            "password": String,
-                                                            "address": String,
-                                                            "email": String -> UNIQUE,
-                                                            "dob": "YYYY-MM-DD",
-                                                            "activeProfilePicture": ProfilePicture
-                                                         }
-
-`DELETE`: localhost:8080/users/{user_name}
+`DELETE`: /users/{userName (String)}
 
 
 # Post Table.
 
-`GET`: localhost:8080/posts
+`GET`: /posts
 
-`GET`: localhost:8080/posts/{user_name}
+`GET`: /posts/{authorId (String)}
 
-`POST`: localhost:8080/posts -- Body (JSON): {
-                                                "textualContent": String,
-                                                "date": "YYYY-MM-DD",
-                                                "author": Person
-                                             }
+`POST`: /posts -- Body (JSON): {
+        "authorId": String,
+        "textualContent": String
+}
 
-`PUT`: localhost:8080/posts/{post_id} -- Body (JSON): {
-                                                         "textualContent": String
-                                                      }
+`PUT`: /posts -- Body (JSON):  {
+        "postId": Long,
+        "textualContent": String
+}
 
-`DELETE`: localhost:8080/posts/{post_id}
+`DELETE`: /posts/{postId (Long)}
 
 
 # Profile_Picture Table.
 
-`GET`: localhost:8080/users/{user_name}/profile_pictures
+`GET`: /profile_pictures/user/{authorId (String)} -> returns all profile pictures for user
 
-`GET`: localhost:8080/users/{user_name}/profile_pictures/{profile_pictures_id}
+`GET`: /profile_pictures/picture/{profilePictureId (Long)} -> returns specific profile picture
 
-`POST`: localhost:8080/users/{user_name}/profile_pictures -- Body (JSON): {
-                                                                             "link": String,
-                                                                             "author": Person
-                                                                          }
-
-`DELETE`: localhost:8080/users/{user_name}/profile_pictures/{profile_pictures_id}
-
+`POST`: /profile_pictures -- Body (JSON): {
+        "link": String,
+        "authorId": String
+}
 
 # Comment Table.
 
-`GET`: localhost:8080/comments/{post_id}
+`GET`: /comments/{postId (Long)}
 
-`POST`: localhost:8080/comments/{post_id} -- Body (JSON): {
-                                                             "textualContent": String,
-                                                             "date": "YYYY-MM-DD",
-                                                             "author": Person,
-                                                             "post": Post
-                                                          }
+`POST`: /comments -- Body (JSON): {
+        "commentId": Long,
+        "postId": Long,
+        "textualContent": String,
+        "authorId": String
+}
 
-`PUT`: localhost:8080/comments/{post_id}/{comment_id} -- Body (JSON): {
-                                                                         "textualContent": String
-                                                                      }
+`PUT`: /comments -- Body (JSON): {
+        "commentId": Long,
+        "postId": Long,
+        "textualContent": String,
+        "authorId": String
+}
 
-`DELETE`: localhost:8080/comments/{post_id}/{comment_id}
+`DELETE`: /comments/{postId (Long)}/{commentId (Long)}
 
 
 # Realtion_Ship Table.
 
-`GET`: localhost:8080/{target_id}/relation_ships/{type}
+`GET`: /relation_ships/{targetId (String)}/{type (RelationShips ENUM)}
 
-`POST`: localhost:8080/{target_id}/relation_ships -- Body (JSON): {
-                                                                     "source": Person,
-                                                                     "target": Person,
-                                                                     "type": Short,
-                                                                     "date": LocalDate
-                                                                  }
+`POST`: /relation_ships -- Body (JSON): {
+        "sourceId": String,
+        "targetId": String,
+        "type": RelationShips ENUM
+}
 
-`PUT`: localhost:8080/{target_id}/relation_ships/{source_id} -- Body (JSON): {
-                                                                                "type": RelationShips ENUM
-                                                                             }
-
-`DELETE`: localhost:8080/{target_id}/relation_ships/{source_id}
+`DELETE`: /relation_ships/{targetId (String)}/{sourceId (String)}
 
 
 # Reaction Table.
 
-`GET`: localhost:8080/reactions/{post_id}
+`GET`: /reactions/{postId (Long)}
 
-`GET`: localhost:8080/reactions/{post_id}/{type}
+`GET`: /reactions/{postId {Long}}/{type (Reactions ENUM)}
 
-`POST`: localhost:8080/reactions/{post_id} -- Body (JSON): {
-                                                              "author": Person,
-                                                              "post": Person,
-                                                              "type": Short,
-                                                              "date": LocalDate
-                                                           }
+`POST`: /reactions -- Body (JSON): {
+        "postId": Long,
+        "authorId": String,
+        "type": Reactions ENUM
+}
 
-`PUT`: localhost:8080/reactions/{post_id}/{user_name} -- Body (JSON): {
-                                                                         "type": Reactions ENUM
-                                                                      }
+`PUT`: /reactions -- Body (JSON): {
+        "postId": Long,
+        "authorId": String,
+        "type": Reactions ENUM
+}
 
-`DELETE`: localhost:8080/reactions/{post_id}/{user_name}
+`DELETE`: /reactions/{postId (Long)}/{authorId (String)}
