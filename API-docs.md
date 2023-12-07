@@ -12,6 +12,7 @@
         "dob": "YYYY-MM-DD",
         "activeProfilePicture": ProfilePictureId
 }
+
 `PUT`: /users -- Body (JSON): {
        "userName": String -> PK,
         "firstName": String,
