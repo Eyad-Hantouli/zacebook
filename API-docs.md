@@ -1,4 +1,4 @@
-# Person Table.
+# users table.
 
 `GET`: /users/{userName (String)}
 
@@ -24,7 +24,7 @@
 `DELETE`: /users/{userName (String)}
 
 
-# Post Table.
+# posts table.
 
 `GET`: /posts
 
@@ -43,7 +43,7 @@
 `DELETE`: /posts/{postId (Long)}
 
 
-# Profile_Picture Table.
+# profile_pictures table.
 
 `GET`: /profile_pictures/user/{authorId (String)} -> returns all profile pictures for user
 
@@ -60,7 +60,7 @@
         "isActive": Boolean
 }
 
-# Comment Table.
+# comments table.
 
 `GET`: /comments/{postId (Long)}
 
@@ -78,10 +78,10 @@
         "authorId": String
 }
 
-`DELETE`: /comments/{postId (Long)}/{commentId (Long)}
+`DELETE`: /comments/{commentId (Long)}
 
 
-# Realtion_Ship Table.
+# relation_ships table.
 
 `GET`: /relation_ships/{targetId (String)}/{type (RelationShips ENUM)}
 
@@ -94,7 +94,7 @@
 `DELETE`: /relation_ships/{targetId (String)}/{sourceId (String)}
 
 
-# Reaction Table.
+# reactions table.
 
 `GET`: /reactions/{postId (Long)}
 
