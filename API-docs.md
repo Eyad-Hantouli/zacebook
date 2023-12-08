@@ -9,19 +9,16 @@
         "password": String,
         "address": String,
         "email": String -> UNIQUE,
-        "dob": "YYYY-MM-DD",
-        "activeProfilePicture": ProfilePictureId
+        "dob": "YYYY-MM-DD"
 }
 
 `PUT`: /users -- Body (JSON): {
-       "userName": String -> PK,
         "firstName": String,
         "lastName": String,
         "password": String,
         "address": String,
         "email": String -> UNIQUE,
-        "dob": "YYYY-MM-DD",
-        "activeProfilePicture": ProfilePictureId
+        "dob": "YYYY-MM-DD"
 }
 
 `DELETE`: /users/{userName (String)}
@@ -54,7 +51,13 @@
 
 `POST`: /profile_pictures -- Body (JSON): {
         "link": String,
+        "isActive": Boolean,
         "authorId": String
+}
+
+`PUT`: /profile_pictures -- Body (JSON): {
+        "profilePictureId": Long,
+        "isActive": Boolean
 }
 
 # Comment Table.
