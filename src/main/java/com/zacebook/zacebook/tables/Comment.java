@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="COMMENT")
+@Table(name="comments")
 public class Comment {
     // PK
     @Id
@@ -25,8 +25,8 @@ public class Comment {
 
     // FK
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person author;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
     // FK
     @ManyToOne(cascade = CascadeType.ALL)
@@ -36,11 +36,14 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String textualContent, LocalDate date, Person author, Post post) {
+    public Comment(String textualContent,
+                   Post post,
+                   User author,
+                   LocalDate date) {
         this.textualContent = textualContent;
-        this.date = date;
         this.author = author;
         this.post = post;
+        this.date = date;
     }
 
     public Long getId() {
@@ -67,11 +70,11 @@ public class Comment {
         this.date = date;
     }
 
-    public Person getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Person author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

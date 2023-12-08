@@ -2,8 +2,10 @@ package com.zacebook.zacebook.tables;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
-@Table(name="PROFILE_PICTURE")
+@Table(name="profile_pictures")
 public class ProfilePicture {
     // PK
     @Id
@@ -19,19 +21,26 @@ public class ProfilePicture {
     private Long id;
 
     private String link;
+    private Boolean isActive;
+    private LocalDate date;
 
     // FK
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person author;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
     public ProfilePicture() {
     }
 
-    public ProfilePicture(Long id, String link, Person author) {
+    public ProfilePicture(Long id,
+                          String link,
+                          User author,
+                          Boolean isActive,
+                          LocalDate date) {
         this.id = id;
         this.link = link;
         this.author = author;
+        this.date = date;
     }
 
     public Long getId() {
@@ -50,11 +59,27 @@ public class ProfilePicture {
         this.link = link;
     }
 
-    public Person getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Person author) {
+    public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="PERSON")
-public class Person {
+@Table(name="users")
+public class User {
     // -- Fields Section --
     // PK
     @Id
@@ -22,17 +22,13 @@ public class Person {
     private String password;
     private LocalDate dob;
     private String address;
-
-    // FK
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "active_profile_picture_id", referencedColumnName = "id")
-    private ProfilePicture activeProfilePicture;
+    private LocalDate creationDate;
 
     // -- Constructors Section --
-    public Person() {
+    public User() {
     }
 
-    public Person(PersonBuilder builder) {
+    public User(UserBuilder builder) {
         this.userName = builder.userName;
         this.email = builder.email;
         this.firstName = builder.firstName;
@@ -40,7 +36,7 @@ public class Person {
         this.password = builder.password;
         this.dob = builder.dob;
         this.address = builder.address;
-        this.activeProfilePicture = builder.activeProfilePicture;
+        this.creationDate = builder.creationDate;
     }
 
     // -- Getter & Setters Section --
@@ -101,17 +97,16 @@ public class Person {
         this.address = address;
     }
 
-    public ProfilePicture getActiveProfilePicture() {
-        return activeProfilePicture;
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 
-    public void setActiveProfilePicture(ProfilePicture activeProfilePicture) {
-        this.activeProfilePicture = activeProfilePicture;
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
-
     // -- Builder Section --
 
-    public static class PersonBuilder {
+    public static class UserBuilder {
         private final String userName;
         private final String email;
         private final String firstName;
@@ -119,39 +114,40 @@ public class Person {
         private final String password;
         private LocalDate dob;
         private String address;
-        private ProfilePicture activeProfilePicture;
+        private LocalDate creationDate;
 
-        public PersonBuilder(String userName, String email, String firstName, String lastName, String password) {
+        public UserBuilder(String userName,
+                             String email,
+                             String firstName,
+                             String lastName,
+                             String password,
+                             LocalDate creationDate) {
             this.userName = userName;
             this.email = email;
             this.firstName = firstName;
             this.lastName = lastName;
             this.password = password;
+            this.creationDate = creationDate;
         }
 
-        public PersonBuilder setDob(LocalDate dob) {
+        public UserBuilder setDob(LocalDate dob) {
             this.dob = dob;
             return this;
         }
 
-        public PersonBuilder setAddress(String address) {
+        public UserBuilder setAddress(String address) {
             this.address = address;
             return this;
         }
 
-        public PersonBuilder setActiveProfilePicture(ProfilePicture activeProfilePicture) {
-            this.activeProfilePicture = activeProfilePicture;
-            return this;
+        public User build() {
+            User user = new User(this);
+            validUser(user);
+            return user;
         }
 
-        public Person build() {
-            Person person = new Person(this);
-            validPerson(person);
-            return person;
-        }
-
-        private void validPerson(Person person) {
-            // some validation logic of person object before initiate it
+        private void validUser(User user) {
+            // some validation logic of user object before initiate it
         }
     }
 }

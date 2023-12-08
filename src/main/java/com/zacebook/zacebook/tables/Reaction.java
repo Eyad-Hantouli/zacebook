@@ -1,18 +1,20 @@
 package com.zacebook.zacebook.tables;
 
+import com.zacebook.zacebook.compositekeys.ReactionKey;
 import com.zacebook.zacebook.enums.Reactions;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name="REACTION")
+@Table(name="reactions")
+@IdClass(ReactionKey.class)
 public class Reaction {
     // PK FK
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person author;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
     // PK FK
     @Id
@@ -26,18 +28,21 @@ public class Reaction {
     public Reaction() {
     }
 
-    public Reaction(Person author, Post post, Reactions type, LocalDate date) {
+    public Reaction(User author,
+                    Post post,
+                    Reactions type,
+                    LocalDate date) {
         this.author = author;
         this.post = post;
         this.type = type;
         this.date = date;
     }
 
-    public Person getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(Person author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

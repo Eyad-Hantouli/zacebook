@@ -1,51 +1,57 @@
 package com.zacebook.zacebook.tables;
 
+import com.zacebook.zacebook.compositekeys.RelationShipKey;
 import com.zacebook.zacebook.enums.RelationShips;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name="RELATION_SHIP")
-public class RealtionShip {
+@Table(name="relation_ships")
+@IdClass(RelationShipKey.class)
+public class RelationShip {
     // PK FK
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sender_id", referencedColumnName = "user_name", nullable = false)
-    private Person source;
+    @JoinColumn(name = "source_id", referencedColumnName = "user_name", nullable = false)
+    private User source;
 
     // PK FK
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "receiver_id", referencedColumnName = "user_name", nullable = false)
-    private Person target;
+    @JoinColumn(name = "target_id", referencedColumnName = "user_name", nullable = false)
+    private User target;
 
     private RelationShips type;
+
     private LocalDate date;
 
-    public RealtionShip() {
+    public RelationShip() {
     }
 
-    public RealtionShip(Person source, Person target, RelationShips type, LocalDate date) {
+    public RelationShip(User source,
+                        User target,
+                        RelationShips type,
+                        LocalDate date) {
         this.source = source;
         this.target = target;
         this.type = type;
         this.date = date;
     }
 
-    public Person getSource() {
+    public User getSource() {
         return source;
     }
 
-    public void setSource(Person source) {
+    public void setSource(User source) {
         this.source = source;
     }
 
-    public Person getTarget() {
+    public User getTarget() {
         return target;
     }
 
-    public void setTarget(Person target) {
+    public void setTarget(User target) {
         this.target = target;
     }
 
