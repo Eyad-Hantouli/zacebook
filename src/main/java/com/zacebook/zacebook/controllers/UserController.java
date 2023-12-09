@@ -26,6 +26,7 @@ public class UserController {
         userService.createUser(requestedUser);
     }
 
+
     @PutMapping
     public void updateUser(@RequestBody Map<String, Object> requestedUser) {
         userService.updateUser(requestedUser);

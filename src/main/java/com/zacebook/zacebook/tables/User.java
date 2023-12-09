@@ -3,6 +3,8 @@ package com.zacebook.zacebook.tables;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name="users")
@@ -101,9 +103,20 @@ public class User {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public Map<String, Object> getAllData() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("userName", this.getUserName());
+        data.put("firstName", this.getFirstName());
+        data.put("lastName", this.getLastName());
+        data.put("email", this.getEmail());
+        data.put("address", this.getAddress());
+        data.put("dob", this.getDob());
+        data.put("creationDate", this.getCreationDate());
+        data.put("password", this.getPassword());
+
+        return data;
     }
+
     // -- Builder Section --
 
     public static class UserBuilder {
