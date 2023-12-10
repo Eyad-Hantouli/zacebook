@@ -1,6 +1,7 @@
 package com.zacebook.zacebook.controllers;
 
 import com.zacebook.zacebook.services.PostService;
+import com.zacebook.zacebook.tables.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

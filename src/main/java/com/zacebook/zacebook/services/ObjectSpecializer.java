@@ -13,6 +13,19 @@ public abstract class ObjectSpecializer {
         return null;
     }
 
+    protected Long getLongValue(Map<String, Object> map, String key) {
+        Object value = map.get(key);
+        if (value != null) {
+            try {
+                return Long.parseLong(value.toString());
+            }
+            catch (Exception exception) {
+                throw new IllegalStateException("key = " + key + " must be in integer format between 1 - " + Long. MAX_VALUE + ".");
+            }
+        }
+        return null;
+    }
+
     protected LocalDate getLocalDateValue(Map<String, Object> map, String key, String format) {
         Object value = map.get(key);
         if (value instanceof String) {

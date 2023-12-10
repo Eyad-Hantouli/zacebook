@@ -1,8 +1,11 @@
 package com.zacebook.zacebook.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name="posts")
@@ -24,18 +27,16 @@ public class Post {
     private LocalDate date;
 
     //FK
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
     public Post() {
     }
 
-    public Post(Long id,
-                String textualContent,
+    public Post(String textualContent,
                 User author,
                 LocalDate date) {
-        this.id = id;
         this.textualContent = textualContent;
         this.author = author;
         this.date = date;
@@ -71,5 +72,16 @@ public class Post {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    @JsonIgnore
+    public Map<String, Object> getAllData() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", this.getId());
+        data.put("textualContent", this.getTextualContent());
+        data.put("date", this.getDate());
+        data.put("author", this.getAuthor().getUserName());
+
+        return data;
     }
 }
