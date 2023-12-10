@@ -1,9 +1,11 @@
 package com.zacebook.zacebook.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -25,6 +27,10 @@ public class User {
     private LocalDate dob;
     private String address;
     private LocalDate creationDate;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
 
     // -- Constructors Section --
     public User() {
@@ -103,6 +109,7 @@ public class User {
         return creationDate;
     }
 
+    @JsonIgnore
     public Map<String, Object> getAllData() {
         Map<String, Object> data = new HashMap<>();
         data.put("userName", this.getUserName());

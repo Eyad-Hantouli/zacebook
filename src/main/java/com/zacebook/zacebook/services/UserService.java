@@ -182,8 +182,8 @@ public class UserService extends ObjectSpecializer{
         if (userName.length() < 1) {
             throw new IllegalStateException("user_name length must be at least 1 character.");
         }
-        boolean userNameExist = userRepository.existsById(userName);
-        if (!userNameExist) {
+        boolean userExist = userRepository.existsById(userName);
+        if (!userExist) {
             throw new IllegalStateException("User with user_name = " + userName + " doesn't exist.");
         }
 
