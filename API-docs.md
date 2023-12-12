@@ -51,13 +51,10 @@
 
 `POST`: /profile_pictures -- Body (JSON): {
         "link": String,
-        "isActive": Boolean,
         "authorId": String
 }
 
-`PUT`: /profile_pictures -- Body (JSON): {
-        "profilePictureId": Long,
-        "isActive": Boolean
+`DELETE`: /profile_pictures/user/{authorId (String)}
 }
 
 # comments table.
