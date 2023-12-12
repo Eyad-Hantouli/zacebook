@@ -23,7 +23,7 @@ public class ProfilePictureController {
     }
 
     @GetMapping(path = "/picture/{profilePictureId}")
-    public List<Map<String, Object>> getProfilePictureById(@PathVariable Long profilePictureId) {
+    public Map<String, Object> getProfilePictureById(@PathVariable Long profilePictureId) {
         return profilePictureService.getProfilePictureById(profilePictureId);
     }
 
@@ -32,8 +32,8 @@ public class ProfilePictureController {
         profilePictureService.createProfilePicture(requestedProfilePicture);
     }
 
-    @PutMapping
-    public void updateProfilePicture(@RequestBody Map<String, Object> requestedProfilePicture) {
-        profilePictureService.updateProfilePicture(requestedProfilePicture);
+    @DeleteMapping(path = "/user/{authorId}")
+    public void updateProfilePicture(@PathVariable String authorId) {
+        profilePictureService.deleteProfilePicture(authorId);
     }
 }

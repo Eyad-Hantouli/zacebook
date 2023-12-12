@@ -1,6 +1,8 @@
 package com.zacebook.zacebook.services;
 
+import com.zacebook.zacebook.repositories.ProfilePictureRepository;
 import com.zacebook.zacebook.repositories.UserRepository;
+import com.zacebook.zacebook.tables.ProfilePicture;
 import com.zacebook.zacebook.tables.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -14,10 +16,22 @@ import java.util.Map;
 @Service
 public class UserService extends ObjectSpecializer{
     private final UserRepository userRepository;
+    private final ProfilePictureRepository profilePictureRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(
+            UserRepository userRepository,
+            ProfilePictureRepository profilePictureRepository) {
         this.userRepository = userRepository;
+        this.profilePictureRepository = profilePictureRepository;
+    }
+
+    private String getProfilePictureLink(User author) {
+        ProfilePicture profilePicture = profilePictureRepository
+                .findByIsActiveAndAuthor(true, author)
+                .orElse(null);
+
+        return profilePicture == null ? null : profilePicture.getLink();
     }
 
     public Map<String, Object> getUserById(String userName) {
@@ -25,7 +39,11 @@ public class UserService extends ObjectSpecializer{
                 .findById(userName)
                 .orElseThrow(() -> new IllegalStateException("User with id = " + userName + " doesn't exist."));
 
-        return user.getAllData();
+        Map<String, Object> respond = user.getAllData();
+        String profilePictureLink = getProfilePictureLink(user);
+        respond.put("profilePicture", profilePictureLink);
+
+        return respond;
     }
 
     public void createUser(Map<String, Object> requestedUser) {

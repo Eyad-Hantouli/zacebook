@@ -1,8 +1,11 @@
 package com.zacebook.zacebook.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name="profile_pictures")
@@ -32,15 +35,13 @@ public class ProfilePicture {
     public ProfilePicture() {
     }
 
-    public ProfilePicture(Long id,
-                          String link,
+    public ProfilePicture(String link,
                           User author,
-                          Boolean isActive,
                           LocalDate date) {
-        this.id = id;
         this.link = link;
         this.author = author;
         this.date = date;
+        this.isActive = true;
     }
 
     public Long getId() {
@@ -81,5 +82,17 @@ public class ProfilePicture {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @JsonIgnore
+    public Map<String, Object> getAllData() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", this.getId());
+        data.put("link", this.getLink());
+        data.put("isActive", this.getActive());
+        data.put("date", this.getDate());
+        data.put("author", this.getAuthor().getUserName());
+
+        return data;
     }
 }
