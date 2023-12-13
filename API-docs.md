@@ -85,7 +85,7 @@
         "type": RelationShips ENUM
 }
 
-`DELETE`: /relation_ships/{targetId (String)}/{sourceId (String)}
+`DELETE`: /relation_ships/{sourceId (String)}/{targetId (String)}
 
 
 # reactions table.
