@@ -62,7 +62,6 @@
 `GET`: /comments/{postId (Long)}
 
 `POST`: /comments -- Body (JSON): {
-        "commentId": Long,
         "postId": Long,
         "textualContent": String,
         "authorId": String
@@ -70,9 +69,7 @@
 
 `PUT`: /comments -- Body (JSON): {
         "commentId": Long,
-        "postId": Long,
-        "textualContent": String,
-        "authorId": String
+        "textualContent": String
 }
 
 `DELETE`: /comments/{commentId (Long)}
