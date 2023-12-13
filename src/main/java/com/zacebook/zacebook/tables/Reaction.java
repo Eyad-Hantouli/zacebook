@@ -12,14 +12,14 @@ import java.time.LocalDate;
 public class Reaction {
     // PK FK
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn
     private User author;
 
     // PK FK
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id", nullable = false)
+    @ManyToOne
+    @JoinColumn
     private Post post;
 
     private Reactions type;

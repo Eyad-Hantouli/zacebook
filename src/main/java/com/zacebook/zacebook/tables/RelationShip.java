@@ -12,13 +12,13 @@ import java.time.LocalDate;
 public class RelationShip {
     // PK FK
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "source_id", referencedColumnName = "user_name", nullable = false)
     private User source;
 
     // PK FK
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "target_id", referencedColumnName = "user_name", nullable = false)
     private User target;
 

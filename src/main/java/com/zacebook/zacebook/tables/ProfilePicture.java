@@ -28,7 +28,7 @@ public class ProfilePicture {
     private LocalDate date;
 
     // FK
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
 
