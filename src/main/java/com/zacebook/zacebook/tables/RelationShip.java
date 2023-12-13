@@ -1,10 +1,13 @@
 package com.zacebook.zacebook.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zacebook.zacebook.compositekeys.RelationShipKey;
 import com.zacebook.zacebook.enums.RelationShips;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name="relation_ships")
@@ -69,5 +72,16 @@ public class RelationShip {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @JsonIgnore
+    public Map<String, Object> getAllData() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("source", this.getSource().getUserName());
+        data.put("target", this.getTarget().getUserName());
+        data.put("type", this.getType());
+        data.put("date", this.getDate());
+
+        return data;
     }
 }

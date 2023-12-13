@@ -1,7 +1,7 @@
 package com.zacebook.zacebook.enums;
 
 public enum RelationShips {
-    BLOCKED,
+    BLOCK,
     FRIEND,
     FRIEND_REQUEST;
 }
