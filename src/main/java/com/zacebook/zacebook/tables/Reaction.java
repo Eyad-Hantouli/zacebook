@@ -1,10 +1,13 @@
 package com.zacebook.zacebook.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zacebook.zacebook.compositekeys.ReactionKey;
 import com.zacebook.zacebook.enums.Reactions;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name="reactions")
@@ -13,13 +16,13 @@ public class Reaction {
     // PK FK
     @Id
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "author_id", referencedColumnName = "user_name", nullable = false)
     private User author;
 
     // PK FK
     @Id
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
     private Post post;
 
     private Reactions type;
@@ -66,7 +69,13 @@ public class Reaction {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    @JsonIgnore
+    public Map<String, Object> getAllData() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("author", this.getAuthor().getUserName());
+        data.put("type", this.getType());
+        data.put("date", this.getDate());
+
+        return data;
     }
 }

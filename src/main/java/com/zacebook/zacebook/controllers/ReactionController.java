@@ -25,7 +25,7 @@ public class ReactionController {
 
     @GetMapping(path = "/{postId}/{type}")
     public List<Map<String, Object>> getReactionsByPostIdAndType(@PathVariable Long postId,
-                                                                      @PathVariable Reactions type) {
+                                                                      @PathVariable String type) {
         return reactionService.getReactionsByPostIdAndType(postId, type);
     }
 
