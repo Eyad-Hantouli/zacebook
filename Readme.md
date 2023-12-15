@@ -1,2 +1,1 @@
-# Pending
-Waiting for pull requist
+Spring rest-api / postgreSQL / JPA / ORM / Business logic
