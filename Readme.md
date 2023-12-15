@@ -1,2 +1,1 @@
-# JPA DDL Code
-code for create structure of database
+Spring rest-api / postgreSQL / JPA / ORM / Business logic
